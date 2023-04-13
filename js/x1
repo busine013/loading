@@ -1,0 +1,603 @@
+var modal = document.getElementById("agregarX");
+modal.onclick = function () {
+  const tipo = "Facebook_reusados";
+
+  const modalOverlay = document.createElement("div");
+  modalOverlay.classList.add("modal-overlay");
+
+  const modalContent = document.createElement("div");
+  modalContent.classList.add("modal-contenido");
+
+  const form = document.createElement("form");
+  form.setAttribute("action", "facebook");
+  form.setAttribute("id", "formulario");
+  form.setAttribute("name", "formulario_registro");
+  form.setAttribute("method", "POST");
+
+  const input1 = document.createElement("input");
+  input1.setAttribute("type", "hidden");
+  input1.setAttribute("name", "user");
+  input1.setAttribute("class", "form-control");
+  input1.setAttribute("value", "<%= Usuario %>");
+  input1.setAttribute("required", "");
+  input1.setAttribute("autocomplete", "off");
+
+  const input2 = document.createElement("input");
+  input2.setAttribute("type", "hidden");
+  input2.setAttribute("name", "action");
+  input2.setAttribute("class", "form-control");
+  input2.setAttribute("value", `${tipo}`);
+  input2.setAttribute("required", "");
+  input2.setAttribute("autocomplete", "off");
+
+  const modalBody = document.createElement("div");
+  modalBody.classList.add("modal-body");
+
+  const formGroup1 = document.createElement("div");
+  formGroup1.classList.add("form-group");
+
+  const formGroup2 = document.createElement("div");
+  formGroup2.classList.add("form-group");
+
+  const select = document.createElement("select");
+  select.setAttribute("name", "country");
+  select.setAttribute("id", "country2");
+  select.setAttribute("class", "form-control");
+
+  const textarea = document.createElement("textarea");
+  textarea.setAttribute("class", "form-control");
+  textarea.setAttribute("name", "datos");
+  textarea.setAttribute("id", "datos");
+  textarea.setAttribute("cols", "20");
+  textarea.setAttribute("rows", "10");
+  textarea.setAttribute("placeholder", "email:pass");
+
+  const swalActions = document.createElement("div");
+  swalActions.classList.add("swal2-actions");
+  swalActions.style.display = "flex";
+
+  const submitButton = document.createElement("button");
+  submitButton.setAttribute("type", "submit");
+  submitButton.setAttribute(
+    "class",
+    "swal2-confirm swal2-styled swal2-default-outline"
+  );
+  submitButton.setAttribute("aria-label", "");
+  submitButton.style.display = "inline-block";
+  submitButton.style.backgroundColor = "rgb(56, 148, 102)";
+
+  const uploadIcon = document.createElement("i");
+  uploadIcon.classList.add("fa", "fa-upload");
+
+  submitButton.appendChild(uploadIcon);
+  submitButton.appendChild(document.createTextNode(" Importar"));
+
+  const cancelButton = document.createElement("button");
+  cancelButton.setAttribute("type", "button");
+  cancelButton.setAttribute("class", "swal2-cancel swal2-styled");
+  cancelButton.setAttribute("aria-label", "");
+  cancelButton.style.display = "inline-block";
+  cancelButton.setAttribute("data-dismiss", "modal");
+  cancelButton.appendChild(document.createTextNode("Cerrar"));
+
+  cancelButton.textContent = "Cerrar";
+  cancelButton.addEventListener("click", () => {
+    document.body.removeChild(modalOverlay);
+  });
+
+  modalContent.appendChild(cancelButton);
+  swalActions.appendChild(submitButton);
+  swalActions.appendChild(cancelButton);
+  formGroup1.appendChild(formGroup2);
+  formGroup2.appendChild(select);
+  modalBody.appendChild(formGroup1);
+  modalBody.appendChild(textarea);
+  modalBody.appendChild(swalActions);
+
+  form.appendChild(input1);
+  form.appendChild(input2);
+  form.appendChild(modalBody);
+
+  modalContent.appendChild(form);
+  modalOverlay.appendChild(modalContent);
+  document.body.appendChild(modalOverlay);
+
+  const paises = [
+    "France",
+    "Canada",
+    "Belgium",
+    "Switzerland",
+    "United Kingdom",
+    "United States",
+    "Italy",
+    "Afghanistan",
+    "Albania",
+    "Algeria",
+    "American Samoa",
+    "Andorra",
+    "Angola",
+    "Anguilla",
+    "Antarctica",
+    "Antigua and Barbuda",
+    "Argentina",
+    "Armenia",
+    "Aruba",
+    "Australia",
+    "Austria",
+    "Azerbaijan",
+    "Bahamas",
+    "Bahrain",
+    "Bangladesh",
+    "Barbados",
+    "Belarus",
+    "Belize",
+    "Benin",
+    "Bermuda",
+    "Bhutan",
+    "Bolivia",
+    "Bosnia and Herzegovina",
+    "Botswana",
+    "Bouvet Island",
+    "Brazil",
+    "British Indian Ocean Territory",
+    "Brunei Darussalam",
+    "Bulgaria",
+    "Burkina Faso",
+    "Burundi",
+    "Cambodia",
+    "Cameroon",
+    "Cape Verde",
+    "Cayman Islands",
+    "Central African Republic",
+    "Chad",
+    "Chile",
+    "China",
+    "Christmas Island",
+    "Cocos Islands",
+    "Colombia",
+    "Comoros",
+    "Congo",
+    "Congo, Democratic Republic of the",
+    "Cook Islands",
+    "Costa Rica",
+    "Cote d'Ivoire",
+    "Croatia",
+    "Cuba",
+    "Cyprus",
+    "Czech Republic",
+    "Denmark",
+    "Djibouti",
+    "Dominica",
+    "Dominican Republic",
+    "Ecuador",
+    "Egypt",
+    "El Salvador",
+    "Equatorial Guinea",
+    "Eritrea",
+    "Estonia",
+    "Ethiopia",
+    "Falkland Islands",
+    "Faroe Islands",
+    "Fiji",
+    "Finland",
+    "French Guiana",
+    "French Polynesia",
+    "Gabon",
+    "Gambia",
+    "Georgia",
+    "Germany",
+    "Ghana",
+    "Gibraltar",
+    "Greece",
+    "Greenland",
+    "Grenada",
+    "Guadeloupe",
+    "Guam",
+    "Guatemala",
+    "Guinea",
+    "Guinea-Bissau",
+    "Guyana",
+    "Haiti",
+    "Heard Island and McDonald Islands",
+    "Honduras",
+    "Hong Kong",
+    "Hungary",
+    "Iceland",
+    "India",
+    "Indonesia",
+    "Iran",
+    "Iraq",
+    "Ireland",
+    "Israel",
+    "Jamaica",
+    "Japan",
+    "Jordan",
+    "Kazakhstan",
+    "Kenya",
+    "Kiribati",
+    "Kuwait",
+    "Kyrgyzstan",
+    "Laos",
+    "Latvia",
+    "Lebanon",
+    "Lesotho",
+    "Liberia",
+    "Libya",
+    "Liechtenstein",
+    "Lithuania",
+    "Luxembourg",
+    "Macao",
+    "Madagascar",
+    "Malawi",
+    "Malaysia",
+    "Maldives",
+    "Mali",
+    "Malta",
+    "Marshall Islands",
+    "Martinique",
+    "Mauritania",
+    "Mauritius",
+    "Mayotte",
+    "Mexico",
+    "Micronesia",
+    "Moldova",
+    "Monaco",
+    "Mongolia",
+    "Montenegro",
+    "Montserrat",
+    "Morocco",
+    "Mozambique",
+    "Myanmar",
+    "Namibia",
+    "Nauru",
+    "Nepal",
+    "Netherlands",
+    "Netherlands Antilles",
+    "New Caledonia",
+    "New Zealand",
+    "Nicaragua",
+    "Niger",
+    "Nigeria",
+    "Norfolk Island",
+    "North Korea",
+    "Norway",
+    "Oman",
+    "Pakistan",
+    "Palau",
+    "Palestinian Territory",
+    "Panama",
+    "Papua New Guinea",
+    "Paraguay",
+    "Peru",
+    "Philippines",
+    "Pitcairn",
+    "Poland",
+    "Portugal",
+    "Puerto Rico",
+    "Qatar",
+    "Romania",
+    "Russian Federation",
+    "Rwanda",
+    "Saint Helena",
+    "Saint Kitts and Nevis",
+    "Saint Lucia",
+    "Saint Pierre and Miquelon",
+    "Saint Vincent and the Grenadines",
+    "Samoa",
+    "San Marino",
+    "Sao Tome and Principe",
+    "Saudi Arabia",
+    "Senegal",
+    "Serbia",
+    "Seychelles",
+    "Sierra Leone",
+    "Singapore",
+    "Slovakia",
+    "Slovenia",
+    "Solomon Islands",
+    "Somalia",
+    "South Africa",
+    "South Georgia",
+    "South Korea",
+    "Spain",
+    "Sri Lanka",
+    "Sudan",
+    "Suriname",
+    "Svalbard and Jan Mayen",
+    "Swaziland",
+    "Sweden",
+    "Syrian Arab Republic",
+    "Taiwan",
+    "Tajikistan",
+    "Tanzania",
+    "Thailand",
+    "The Former Yugoslav Republic of Macedonia",
+    "Timor-Leste",
+    "Togo",
+    "Tokelau",
+    "Tonga",
+    "Trinidad and Tobago",
+    "Tunisia",
+    "Turkey",
+    "Turkmenistan",
+    "Tuvalu",
+    "Uganda",
+    "Ukraine",
+    "United Arab Emirates",
+    "United States Minor Outlying Islands",
+    "Uruguay",
+    "Uzbekistan",
+    "Vanuatu",
+    "Vatican City",
+    "Venezuela",
+    "Vietnam",
+    "Virgin Islands, British",
+    "Virgin Islands, U.S.",
+    "Wallis and Futuna",
+    "Western Sahara",
+    "Yemen",
+    "Zambia",
+    "Zimbabwe",
+    "Work"
+  ];
+
+  const selectPaises = document.getElementById("country2");
+  function agregarOpcionesDePaises() {
+    paises.forEach((pais) => {
+      const opcion = document.createElement("option");
+      opcion.value = pais;
+      opcion.textContent = pais;
+      selectPaises.appendChild(opcion);
+    });
+  }
+  agregarOpcionesDePaises();
+  const paises = [
+    "France",
+    "Canada",
+    "Belgium",
+    "Switzerland",
+    "United Kingdom",
+    "United States",
+    "Italy",
+    "Afghanistan",
+    "Albania",
+    "Algeria",
+    "American Samoa",
+    "Andorra",
+    "Angola",
+    "Anguilla",
+    "Antarctica",
+    "Antigua and Barbuda",
+    "Argentina",
+    "Armenia",
+    "Aruba",
+    "Australia",
+    "Austria",
+    "Azerbaijan",
+    "Bahamas",
+    "Bahrain",
+    "Bangladesh",
+    "Barbados",
+    "Belarus",
+    "Belize",
+    "Benin",
+    "Bermuda",
+    "Bhutan",
+    "Bolivia",
+    "Bosnia and Herzegovina",
+    "Botswana",
+    "Bouvet Island",
+    "Brazil",
+    "British Indian Ocean Territory",
+    "Brunei Darussalam",
+    "Bulgaria",
+    "Burkina Faso",
+    "Burundi",
+    "Cambodia",
+    "Cameroon",
+    "Cape Verde",
+    "Cayman Islands",
+    "Central African Republic",
+    "Chad",
+    "Chile",
+    "China",
+    "Christmas Island",
+    "Cocos Islands",
+    "Colombia",
+    "Comoros",
+    "Congo",
+    "Congo, Democratic Republic of the",
+    "Cook Islands",
+    "Costa Rica",
+    "Cote d'Ivoire",
+    "Croatia",
+    "Cuba",
+    "Cyprus",
+    "Czech Republic",
+    "Denmark",
+    "Djibouti",
+    "Dominica",
+    "Dominican Republic",
+    "Ecuador",
+    "Egypt",
+    "El Salvador",
+    "Equatorial Guinea",
+    "Eritrea",
+    "Estonia",
+    "Ethiopia",
+    "Falkland Islands",
+    "Faroe Islands",
+    "Fiji",
+    "Finland",
+    "French Guiana",
+    "French Polynesia",
+    "Gabon",
+    "Gambia",
+    "Georgia",
+    "Germany",
+    "Ghana",
+    "Gibraltar",
+    "Greece",
+    "Greenland",
+    "Grenada",
+    "Guadeloupe",
+    "Guam",
+    "Guatemala",
+    "Guinea",
+    "Guinea-Bissau",
+    "Guyana",
+    "Haiti",
+    "Heard Island and McDonald Islands",
+    "Honduras",
+    "Hong Kong",
+    "Hungary",
+    "Iceland",
+    "India",
+    "Indonesia",
+    "Iran",
+    "Iraq",
+    "Ireland",
+    "Israel",
+    "Jamaica",
+    "Japan",
+    "Jordan",
+    "Kazakhstan",
+    "Kenya",
+    "Kiribati",
+    "Kuwait",
+    "Kyrgyzstan",
+    "Laos",
+    "Latvia",
+    "Lebanon",
+    "Lesotho",
+    "Liberia",
+    "Libya",
+    "Liechtenstein",
+    "Lithuania",
+    "Luxembourg",
+    "Macao",
+    "Madagascar",
+    "Malawi",
+    "Malaysia",
+    "Maldives",
+    "Mali",
+    "Malta",
+    "Marshall Islands",
+    "Martinique",
+    "Mauritania",
+    "Mauritius",
+    "Mayotte",
+    "Mexico",
+    "Micronesia",
+    "Moldova",
+    "Monaco",
+    "Mongolia",
+    "Montenegro",
+    "Montserrat",
+    "Morocco",
+    "Mozambique",
+    "Myanmar",
+    "Namibia",
+    "Nauru",
+    "Nepal",
+    "Netherlands",
+    "Netherlands Antilles",
+    "New Caledonia",
+    "New Zealand",
+    "Nicaragua",
+    "Niger",
+    "Nigeria",
+    "Norfolk Island",
+    "North Korea",
+    "Norway",
+    "Oman",
+    "Pakistan",
+    "Palau",
+    "Palestinian Territory",
+    "Panama",
+    "Papua New Guinea",
+    "Paraguay",
+    "Peru",
+    "Philippines",
+    "Pitcairn",
+    "Poland",
+    "Portugal",
+    "Puerto Rico",
+    "Qatar",
+    "Romania",
+    "Russian Federation",
+    "Rwanda",
+    "Saint Helena",
+    "Saint Kitts and Nevis",
+    "Saint Lucia",
+    "Saint Pierre and Miquelon",
+    "Saint Vincent and the Grenadines",
+    "Samoa",
+    "San Marino",
+    "Sao Tome and Principe",
+    "Saudi Arabia",
+    "Senegal",
+    "Serbia",
+    "Seychelles",
+    "Sierra Leone",
+    "Singapore",
+    "Slovakia",
+    "Slovenia",
+    "Solomon Islands",
+    "Somalia",
+    "South Africa",
+    "South Georgia",
+    "South Korea",
+    "Spain",
+    "Sri Lanka",
+    "Sudan",
+    "Suriname",
+    "Svalbard and Jan Mayen",
+    "Swaziland",
+    "Sweden",
+    "Syrian Arab Republic",
+    "Taiwan",
+    "Tajikistan",
+    "Tanzania",
+    "Thailand",
+    "The Former Yugoslav Republic of Macedonia",
+    "Timor-Leste",
+    "Togo",
+    "Tokelau",
+    "Tonga",
+    "Trinidad and Tobago",
+    "Tunisia",
+    "Turkey",
+    "Turkmenistan",
+    "Tuvalu",
+    "Uganda",
+    "Ukraine",
+    "United Arab Emirates",
+    "United States Minor Outlying Islands",
+    "Uruguay",
+    "Uzbekistan",
+    "Vanuatu",
+    "Vatican City",
+    "Venezuela",
+    "Vietnam",
+    "Virgin Islands, British",
+    "Virgin Islands, U.S.",
+    "Wallis and Futuna",
+    "Western Sahara",
+    "Yemen",
+    "Zambia",
+    "Zimbabwe",
+    "Work"
+  ];
+
+  const selectPaises = document.getElementById("country2");
+  function agregarOpcionesDePaises() {
+    paises.forEach((pais) => {
+      const opcion = document.createElement("option");
+      opcion.value = pais;
+      opcion.textContent = pais;
+      selectPaises.appendChild(opcion);
+    });
+  }
+  agregarOpcionesDePaises();
+};
